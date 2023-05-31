@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { useState } from 'react'
+
+
+import { AppStyles } from './App/AppStyle'
+
+import { GameArea } from './GameAreaFolder/GameArea'
+
+
+import { CreateNewBoard } from './CreateNewBoard/NewGameBoardBtn'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  const [gameBoardNumber, setGameBoardNumber] = useState([])
 
-export default App;
+  function addGameBoardnumber() {
+    setGameBoardNumber([...gameBoardNumber, gameBoardNumber.length + 1])
+  }
+
+  return (
+    <AppStyles>
+      <CreateNewBoard onClick={addGameBoardnumber} />
+      {gameBoardNumber.map((item) => {
+        return <GameArea key={item} />
+      })}
+    </AppStyles>
+  )
+}
+export default App
